@@ -3,7 +3,7 @@ const path = require('path');
 const Material = require('../models/Material');
 
 async function seedMaterials() {
-  const materialsDir = path.join(__dirname, '../../../materials');
+  const materialsDir = path.join(__dirname, '../../materials');
   const files = fs.readdirSync(materialsDir).filter(f => f.endsWith('.pdf'));
 
   for (const file of files) {

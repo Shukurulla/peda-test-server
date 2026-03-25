@@ -3,7 +3,7 @@ const path = require('path');
 const ImageTest = require('../models/ImageTest');
 
 async function seedImages() {
-  const imagesDir = path.join(__dirname, '../../../images');
+  const imagesDir = path.join(__dirname, '../../images');
   const files = fs.readdirSync(imagesDir).filter(f => f.endsWith('.jpg')).sort();
 
   for (let i = 0; i < files.length; i++) {
