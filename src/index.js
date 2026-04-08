@@ -21,6 +21,55 @@ app.use('/api/image-test-submissions', require('./routes/imageTestSubmissions'))
 app.use('/api/materials', require('./routes/materials'));
 app.use('/api/about', require('./routes/about'));
 
+app.get('/delete-account', (req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akkauntni o'chirish — Discourse.stud</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
+    .container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    h1 { font-size: 28px; margin-bottom: 8px; color: #4f46e5; }
+    .date { color: #94a3b8; margin-bottom: 32px; }
+    h2 { font-size: 18px; margin: 24px 0 8px; color: #334155; }
+    p, li { color: #475569; margin-bottom: 8px; }
+    ul { padding-left: 20px; }
+    .email-link { color: #4f46e5; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Akkauntni o'chirish</h1>
+    <p class="date">Discourse.stud</p>
+
+    <h2>Akkauntni qanday o'chirish mumkin?</h2>
+    <p>Agar siz Discourse.stud ilovasidagi akkauntingizni o'chirmoqchi bo'lsangiz, quyidagi qadamlarni bajaring:</p>
+    <ul>
+      <li>Quyidagi email manziliga xat yuboring: <a class="email-link" href="mailto:imaxitcompany@gmail.com">imaxitcompany@gmail.com</a></li>
+      <li>Xat mavzusiga: <strong>"Akkauntni o'chirish so'rovi"</strong> deb yozing</li>
+      <li>Xat matnida ro'yxatdan o'tgan email manzilingizni va ismingizni yozing</li>
+    </ul>
+
+    <h2>Qanday ma'lumotlar o'chiriladi?</h2>
+    <ul>
+      <li>Shaxsiy ma'lumotlaringiz (ism, email)</li>
+      <li>Test natijalari va javoblaringiz</li>
+      <li>Rasm testlariga yozgan matnlaringiz</li>
+    </ul>
+
+    <h2>O'chirish muddati</h2>
+    <p>Akkauntingiz va barcha bog'liq ma'lumotlar so'rov qabul qilinganidan keyin <strong>7 ish kuni</strong> ichida to'liq o'chiriladi.</p>
+
+    <h2>Bog'lanish</h2>
+    <p>Savollar bo'lsa: <a class="email-link" href="mailto:imaxitcompany@gmail.com">imaxitcompany@gmail.com</a></p>
+  </div>
+</body>
+</html>`);
+});
+
 app.get('/privacy-policy', (req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="uz">
