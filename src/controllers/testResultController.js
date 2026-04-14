@@ -3,23 +3,24 @@ const Test = require('../models/Test');
 
 exports.submit = async (req, res, next) => {
   try {
-    const { sectionId, answers } = req.body;
-    // answers = [{ testId, selectedAnswer }]
+    const sectionId = req.body.sectionId || req.body.section;
+    const answers = req.body.answers || [];
 
     const existing = await TestResult.findOne({ student: req.user._id, section: sectionId });
     if (existing) return res.status(400).json({ message: 'Bu bo\'lim uchun allaqachon javob bergansiz', result: existing });
 
-    const testIds = answers.map(a => a.testId);
+    const testIds = answers.map(a => a.testId || a.test);
     const tests = await Test.find({ _id: { $in: testIds } }).lean();
     const testMap = {};
     tests.forEach(t => { testMap[t._id.toString()] = t; });
 
     let score = 0;
     const processedAnswers = answers.map(a => {
-      const test = testMap[a.testId];
+      const testId = a.testId || a.test;
+      const test = testMap[testId];
       const isCorrect = test && test.correctAnswer === a.selectedAnswer;
       if (isCorrect) score++;
-      return { test: a.testId, selectedAnswer: a.selectedAnswer, isCorrect };
+      return { test: testId, selectedAnswer: a.selectedAnswer, isCorrect };
     });
 
     const totalQuestions = tests.length;
@@ -75,6 +76,7 @@ exports.getStudentResults = async (req, res, next) => {
   try {
     const results = await TestResult.find({ student: req.params.studentId })
       .populate('section')
+      .populate('answers.test')
       .sort('-createdAt');
     res.json(results);
   } catch (err) { next(err); }
